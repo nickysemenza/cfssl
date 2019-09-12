@@ -1,3 +1,6 @@
+name: Go
+on: [push]
+
 jobs:
   build:
     name: Build
@@ -11,16 +14,12 @@ jobs:
         uses: actions/checkout@v1
         with:
           fetch-depth: 1
-          path: go/src/github.com/cloudflare/cf-ssl
-      - env:
-          GOPATH: /home/runner/work/cloudflare/go
-        name: Test
-        run:
-          "go get -u golang.org/x/tools/cmd/cover\ngo get -u golang.org/x/net/context\ngo get -u golang.org/x/net/context/ctxhttp\ngo get -u github.com/golang/protobuf/proto\ngo get -u github.com/golang/protobuf/protoc-gen-go\ngo test -cover $(go list ./... | grep -v /vendor/)\n"
+          path: go/src/github.com/cloudflare/cfssl
+      # - env:
+      #     GOPATH: /home/runner/work/cloudflare/go
+      #   name: Test
+      #   run: ./test.sh
       - env:
           GOPATH: /home/runner/work/cloudflare/go
         name: Build
-        run: ./.drone.sh
-name: Go
-"true":
-  - push
+        run: make
