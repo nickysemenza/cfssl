@@ -14,11 +14,6 @@ jobs:
           path: go/src/github.com/cloudflare/cf-ssl
       - env:
           GOPATH: /home/runner/work/cloudflare/go
-        name: Debug
-        run:
-          "pwd\necho ${HOME}\necho ${GITHUB_WORKSPACE}\necho ${GOPATH}\necho ${GOROOT}\n"
-      - env:
-          GOPATH: /home/runner/work/cloudflare/go
         name: Test
         run:
           "go get -u golang.org/x/tools/cmd/cover\ngo get -u golang.org/x/net/context\ngo get -u golang.org/x/net/context/ctxhttp\ngo get -u github.com/golang/protobuf/proto\ngo get -u github.com/golang/protobuf/protoc-gen-go\ngo test -cover $(go list ./... | grep -v /vendor/)\n"
